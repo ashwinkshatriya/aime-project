@@ -1,0 +1,27 @@
+<div class="sidebar-container text-light py-4">
+    <div class="list-group">
+      <div *ngFor="let item of items" class="list-item d-flex align-items-center" [ngClass]="{ 'custom-background': item.highlight }">
+        
+        <!-- Anime Rank -->
+        <span class="item-index text" [ngClass]="{ 'highlight-rank': item.highlight }">{{ item.rank }}</span>
+  
+        <!-- Anime Image -->
+        <img [src]="item.image" [alt]="item.title" class="item-img">
+  
+        <!-- Anime Details -->
+        <div class="item-content ms-3">
+          <h5 class="item-title" (click)="goToAnimeDetail(item._id)" style="cursor: pointer;">
+            {{ item.title }}
+          </h5>
+          
+          <!-- Anime Badges -->
+          <div class="item-badges d-flex">
+            <span *ngFor="let badge of item.badges" class="badge d-flex align-items-center" [ngClass]="badge.class">
+              <i class="{{ badge.icon }} me-1 icon-large"></i> {{ badge.text }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

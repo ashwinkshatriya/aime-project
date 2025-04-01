@@ -1,0 +1,26 @@
+<div class="carousel" *ngIf="items.length > 0">
+    <div class="list">
+        <div *ngFor="let item of items; let i = index" class="item" [class.active]="i === currentIndex">
+            <img [src]="item.posterImage" alt="{{ item.title }}"> 
+            <div class="black-overlay"></div>
+            <div class="black-overlay-bottom"></div>
+            <div class="content">
+                <h2 class="title">{{ item.title }}</h2>
+                <p class="des">{{ item.description }}</p>
+                <div class="buttons">
+                    <button class="btn" (click)="onWatchNow(item._id)"> 
+                        <i class="fas fa-play"></i> Watch Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation Arrows -->
+    <button class="arrow left" (click)="onPrev()">
+        <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <button class="arrow right" (click)="onNext()">
+        <i class="fa-solid fa-chevron-right"></i>
+    </button>
+</div>

@@ -1,0 +1,199 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-container {
+    font-family: 'Poppins', sans-serif;
+    position: absolute;
+    right: 0;
+    height: auto;
+    width: 400px;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    overflow: hidden;
+    background-color: #1b1b1b;
+    transition: width 0.3s ease-in-out;
+
+}
+
+/* List Item */
+.list-item {
+    padding: 0.95rem;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    flex-wrap: wrap;
+    /* Allow wrapping if needed */
+}
+
+/* Underline Effect */
+.list-item::after {
+    content: '';
+    position: absolute;
+    left: 14%;
+    right: 10%;
+    bottom: 0;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.list-item:nth-child(10)::after {
+    content: none;
+}
+
+/* Custom Background Styling */
+.custom-background {
+    position: relative;
+}
+
+.custom-background .item-index {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 3px;
+    color: white;
+}
+
+.custom-background .item-index::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 70%;
+    height: 3px;
+    background-color: #FFB26F;
+    transform: translateX(-50%);
+}
+
+/* Item Index */
+.item-index {
+    font-weight: bold;
+    font-size: 1.25rem;
+    min-width: 40px;
+    text-align: center;
+}
+
+/* Rank Highlight */
+.highlight-rank {
+    color: #FFB26F;
+}
+
+/* Responsive Image */
+.item-img {
+    width: 60px;
+    height: 78px;
+    border-radius: 2px;
+    object-fit: cover;
+}
+
+.item-content {
+    flex-grow: 1;
+}
+
+/* Title */
+.item-title {
+    width: 14rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 5px;
+}
+
+/* Hover Effects */
+.list-item:hover .item-index,
+.list-item:hover .item-title {
+    cursor: pointer;
+    color: #FFB26F;
+}
+
+/* Item Badges */
+.item-badges {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-badges .badge {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.6rem;
+    margin-right: 0.2rem;
+    color: black;
+}
+
+/* Badges */
+.badge.bg-light-green {
+    background-color: #87D08D;
+    border-radius: 10px 0 0 10px;
+}
+
+.badge.bg-light-bluee {
+    background-color: #B9E7FF;
+    border-radius: 0 10px 10px 0;
+}
+
+.badge.bg-secondary {
+    background-color: #6c757d;
+}
+
+/* Reduce image size on smaller screens */
+
+/* Responsive Sidebar */
+@media (max-width: 1024px) {
+    .sidebar-container {
+        width: 100%;
+        /* Full width on smaller screens */
+        height: auto;
+        position: relative;
+        /* Ensure it stacks properly */
+    }
+
+    .item-title {
+        font-size: 10px;
+        font-weight: 500;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 768px) {
+    .item-img {
+        width: 50px;
+        height: 65px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar-container {
+        width: 100%;
+        /* Full width on smaller screens */
+        height: auto;
+        position: relative;
+        /* Ensure it stacks properly */
+    }
+}
+
+/* Responsive Badges */
+@media (max-width: 768px) {
+    .item-badges .badge {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+    }
+}
+
+@media (max-width: 1199px) {
+    .sidebar-container {
+        width: 100%;
+        /* Full width on smaller screens */
+        height: auto;
+        position: relative;
+        /* Ensure it stacks properly */
+    }
+}

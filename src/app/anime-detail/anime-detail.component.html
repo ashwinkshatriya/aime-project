@@ -1,0 +1,54 @@
+<div class="anime-detail-container">
+  <!-- Left: Anime Details -->
+  <div class="anime-info">
+    <img [src]="anime?.image" [alt]="anime?.title" class="anime-image">
+
+    <div class="anime-details">
+      <h2>{{ anime?.title }}</h2>
+      <p class="anime-description" [ngClass]="{'expanded': isExpanded}" (click)="isExpanded = !isExpanded">
+        {{ anime?.description }}
+      </p>
+
+      <p><strong>Country:</strong> {{ anime?.country }}</p>
+      <p><strong>Genres:</strong> {{ anime?.genres?.join(', ') }}</p>
+      <p><strong>Premiered:</strong> {{ anime?.premiered }}</p>
+      <p><strong>Mal:</strong> {{ anime?.malRating || 'N/A' }}</p>  
+      <p><strong>Date aired:</strong> {{ anime?.DateAired }}</p>  
+      <p><strong>Broadcast:</strong> {{ anime?.broadcast }}</p>  
+      <p><strong>Status:</strong> {{ anime?.status }}</p>  
+      <p><strong>Episode:</strong> {{ anime?.totalEpisodes }}</p>  
+      <p><strong>Duration:</strong> {{ anime?.duration }}</p>  
+      <p><strong>Studios:</strong> {{ anime?.studio }}</p>  
+      <p><strong>Producers:</strong> {{ anime?.producers }}</p>  
+    </div>
+  </div>
+
+  <!-- Center: Video Player -->
+  <div class="video-player">
+    <iframe *ngIf="currentVideoUrl" [src]="currentVideoUrl" frameborder="0" allowfullscreen></iframe>
+  
+    <!-- Separate Sub and Dub Buttons -->
+    <div class="language-switch-buttons">
+      <button (click)="playSub()" [disabled]="!hasSub(currentEpisodeNumber!)">
+        Play Sub
+      </button>
+      <button (click)="playDub()" *ngIf="hasDub(currentEpisodeNumber!)">
+        Play Dub
+      </button>
+    </div>
+  </div>
+  
+  
+
+  <!-- Right: Episode List -->
+  <div class="episode-list">
+    <h3>Episodes</h3>
+    <ul>
+      <li *ngFor="let episode of (anime?.episodes?.sub || [])">
+        <button (click)="selectEpisode(episode.episodeNumber)">
+          Episode {{ episode.episodeNumber }}
+        </button>
+      </li>
+    </ul>
+  </div>
+</div>

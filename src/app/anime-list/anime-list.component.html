@@ -1,0 +1,107 @@
+<div class="anime-list-container">
+  <div class="filter-bar">
+    <!-- Genre Filter Dropdown -->
+    <div class="dropdown" [class.open]="openDropdown === 'genre'">
+      <button class="dropdown-btn" (click)="toggleDropdown('genre')">
+        {{ getLabel('genre') }} <i class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="dropdown-content geners">
+        <label *ngFor="let genre of genres">
+          <input type="checkbox" [value]="genre" [checked]="selectedGenres.includes(genre)"
+            (change)="toggleGenre(genre)"> {{ genre | titlecase }}
+        </label>
+      </div>
+    </div>
+
+    <!-- Status Filter Dropdown -->
+    <div class="dropdown" [class.open]="openDropdown === 'status'">
+      <button class="dropdown-btn" (click)="toggleDropdown('status')">
+        {{ getLabel('status') }} <i class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <label *ngFor="let status of statuses">
+          <input
+            type="checkbox"
+            name="status"
+            [value]="status"
+            [checked]="selectedStatus.includes(status)"
+            (change)="setStatus(status)" />  <!-- Make sure input is self-closed -->
+          {{ status }}
+        </label>
+      </div>
+    </div>
+    
+    
+
+    <!-- Type Filter Dropdown -->
+    <div class="dropdown" [class.open]="openDropdown === 'type'">
+      <button class="dropdown-btn" (click)="toggleDropdown('type')">
+        {{ getLabel('type') }} <i class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <label *ngFor="let type of types">
+          <input type="checkbox" [value]="type" [checked]="selectedTypes.includes(type)" (change)="toggleType(type)"> {{type | uppercase }}
+          
+
+        </label>
+      </div>
+    </div>
+
+    <!-- Sort Dropdown -->
+    <div class="dropdown" [class.open]="openDropdown === 'sort'">
+      <button class="dropdown-btn" (click)="toggleDropdown('sort')">
+        {{ getLabel('sort') }} <i class="fa-solid fa-angle-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <label>
+          <input type="radio" name="sort" value="updatedAt" [(ngModel)]="selectedSort" (change)="setSort('updatedAt')">
+          Recently Updated
+        </label>
+        <label>
+          <input type="radio" name="sort" value="rating" [(ngModel)]="selectedSort" (change)="setSort('rating')"> MAL
+          Score
+        </label>
+        <label>
+          <input type="radio" name="sort" value="release" [(ngModel)]="selectedSort" (change)="setSort('release')">
+          Release Date
+        </label>
+        <label>
+          <input type="radio" name="sort" value="mostWatched" [(ngModel)]="selectedSort"
+            (change)="setSort('mostWatched')"> Most Watched
+        </label>
+
+
+      </div>
+    </div>
+
+    <!-- Filter Button -->
+    <button class="filter-button" (click)="applyFilters()">
+      <i class="fa-solid fa-pencil"></i> Filter
+    </button>
+  </div>
+
+  <!-- Anime Grid -->
+  <div class="anime-grid">
+    <div class="anime-card" *ngFor="let anime of animes">
+      <a [routerLink]="['/anime-detail', anime._id]" target="_blank" rel="noopener noreferrer">
+        <div class="anime-thumbnail">
+          <img [src]="anime.image" alt="{{ anime.title }}">
+          
+          <!-- This will conditionally display the 18+ badge -->
+          <span *ngIf="anime.isAdult === true" class="age-restriction">18+</span>
+  
+          <div class="tags">
+            <span class="cc"><i class="fa-solid fa-closed-captioning"></i> {{ anime.subEpisodes }}</span>
+            <span class="mic"><i class="fa-solid fa-microphone"></i> {{ anime.dubEpisodes }}</span>
+          </div>
+        </div>
+        <div class="anime-info">
+          <h3 class="anime-title">{{ anime.title }}</h3>
+          <p class="anime-meta">{{ anime.type === 'TV SERIES' ? 'TV' : anime.type }} • {{ anime.duration || 'N/A' }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+
+</div>

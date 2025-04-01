@@ -1,0 +1,20 @@
+# Ignore Node.js dependencies
+node_modules/
+
+# Ignore Angular build files
+dist/
+
+# Ignore MongoDB database files
+animeDB/
+
+# Ignore Angular and backend dependencies
+.angular/
+backend/node_modules/
+backend/dist/
+
+# Ignore log files and environment files
+*.log
+package-lock.json
+backend/package-lock.json
+.env
+backend/.env

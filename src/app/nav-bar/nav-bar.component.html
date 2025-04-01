@@ -1,0 +1,59 @@
+<nav class="navbar">
+  <div class="logo">
+    <span>Soul</span><span class="highlight">Anime</span>
+  </div>
+
+  <!-- From Uiverse.io by marcel_4026 -->
+  <div class="search-container">
+    <div class="input-wrapper">
+      <input [(ngModel)]="searchQuery" (ngModelChange)="onSearchQueryChange(searchQuery)" 
+        placeholder="Search Anime" class="input" name="search" type="text" />
+      <button class="Subscribe-btn" (click)="subscribeAndRedirect()">
+        <i class="fa-solid fa-filter"></i>
+      </button>
+    </div>
+
+    <div *ngIf="searchResults.length > 0" class="search-results">
+      <ul>
+        <li *ngFor="let result of searchResults" (click)="goToAnimeDetail(result._id)">
+          <a>{{ result.title }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+
+
+  <div class="nav-links">
+    <div class="nav-item" (click)="toggleGenres()">
+      GENRES
+      <div class="dropdown genres-dropdown" [class.show]="isGenresOpen">
+        <div class="dropdown-grid">
+          <div *ngFor="let genre of genres" class="dropdown-item" (click)="sortByGenre(genre)">
+            {{ genre }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nav-item" (click)="toggleTypes()">
+      TYPES
+      <div class="dropdown types-dropdown" [class.show]="isTypesOpen">
+        <div class="dropdown-list">
+          <div *ngFor="let type of types" class="dropdown-item" (click)="sortByType(type)">
+            {{ type }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a (click)="sortByCategory('new releases')">NEW RELEASES</a>
+    <a (click)="sortByCategory('updates')">UPDATES</a>
+    <a (click)="sortByCategory('ongoing')">ONGOING</a>
+    <a (click)="sortByCategory('recent')">RECENT</a>
+  </div>
+
+  <!-- <div class="nav-right">
+    <div class="profile-icon"><i class="fa-regular fa-user"></i></div>
+  </div> -->
+</nav>

@@ -1,0 +1,511 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+}
+
+.anime-list-container {
+  background-color: #1b1b1b;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding: 9%; 
+}
+
+/* Responsive Filter Bar */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on small screens */
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Dropdown Styling */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-btn {
+  background: #030303;
+  color: gray;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 300;
+  min-width: 250px; /* Reduced for responsiveness */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Dropdown Content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #292929;
+  padding: 10px;
+  border-radius: 10px;
+  min-width: 100%;
+  margin-top: 5px;
+  z-index: 1;
+}
+
+.dropdown.open .dropdown-content {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  font-weight: 300;
+  color: #ccc;
+}
+
+/* Genre Styling */
+.geners {
+  position: absolute;
+  left: 0;
+  width: max-content;
+  min-width: 100%;
+  background: #292929;
+  color: white;
+  padding: 7px 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  z-index: 1;
+}
+
+.dropdown.open .geners {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Responsive grid */
+  gap: 5px;
+  padding: 10px 15px;
+}
+
+/* Filter Button */
+.filter-button {
+  background: #488345;
+  color: white;
+  padding: 8px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Responsive Anime Grid */
+.anime-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(160px, 1fr)); /* Adjusts dynamically */
+  gap: 15px;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Anime Card */
+.anime-card {
+  width: 100%;
+  max-width: 200px;
+  background: #2c2c2c;
+  border-radius: 10px;
+  padding: 5px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  position: relative;
+}
+
+.anime-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Age Restriction Badge */
+.age-restriction {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: red;
+  color: white;
+  font-size: 0.8em;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 5px;
+}
+
+/* Thumbnail */
+.anime-thumbnail {
+  position: relative;
+  width: 100%;
+  padding-top: 140%;
+  overflow: hidden;
+}
+
+.anime-thumbnail img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: block;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Anime Info */
+.anime-info {
+  padding: 10px;
+  color: white;
+  text-align: left;
+}
+
+.anime-title {
+  font-size: 1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.anime-meta {
+  font-size: 0.9em;
+  color: #ccc;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping */
+  padding: 5px 10px;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  gap: 5px;
+  width: 100%;
+  font-size: 0.85em;
+}
+
+.tags span {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.tags .cc { background-color: #87D08D; color: #000; }
+.tags .mic { background-color: #B9E7FF; color: #000; }
+
+/* Checkbox & Radio Button Styling */
+.dropdown-content input[type="checkbox"],
+.dropdown-content input[type="radio"] {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  background: grey;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  position: relative;
+}
+
+/* Checked State */
+.dropdown-content input[type="checkbox"]:checked {
+  background-color: #488345;
+  border-color: #488345;
+}
+
+/* Checkmark */
+.dropdown-content input[type="checkbox"]::before {
+  content: '\2713';
+  font-size: 14px;
+  color: white;
+  display: none;
+  text-align: center;
+  font-weight: bold;
+}
+
+.dropdown-content input[type="checkbox"]:checked::before {
+  display: block;
+}
+
+/* Radio Button Styling */
+.dropdown-content input[type="radio"] {
+  border-radius: 50%;
+}
+
+/* When radio is checked, show inner circle */
+.dropdown-content input[type="radio"]:checked::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+}
+
+/* 📱 Responsive Media Queries */
+@media (max-width: 1200px) {
+  .anime-grid {
+    grid-template-columns: repeat(5, minmax(100px, 1fr)); /* More balanced grid */
+    gap: 15px; /* Improved spacing */
+  }
+
+  .anime-card {
+    max-width: 195px; /* Optimized for better alignment */
+    width: 100%;
+  }
+
+  .anime-card:hover {
+    transform: none;
+  }
+
+  .dropdown-btn {
+    text-align: left;
+   width: 100%;
+   min-width: unset;
+   padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .filter-button {
+    font-size: 13px;
+    padding: 7px 15px;
+    min-width: 120px;
+  }
+
+  .geners {
+    position: absolute;
+    left: 0;
+    width: max-content;
+    min-width: 100%;
+    background: #292929;
+    color: white;
+    padding: 8px 12px; /* Balanced padding */
+    border-radius: 8px;
+    font-size: 13px;
+    z-index: 1;
+  }
+
+  .dropdown.open .geners {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr)); /* Fixed responsiveness */
+    gap: 8px; /* Better spacing */
+    padding: 10px;
+  }
+  .filter-bar {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .filter-bar :nth-child(5){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 195%;
+  }
+}
+
+@media (max-width: 992px) {
+  .anime-grid {
+    grid-template-columns: repeat(4, minmax(100px, 1fr)); /* More balanced grid */
+    gap: 15px; /* Improved spacing */
+  }
+
+  .anime-card {
+    max-width: 195px; /* Optimized for better alignment */
+    width: 100%;
+  }
+
+  .anime-card:hover {
+    transform: none;
+  }
+
+  .dropdown-btn {
+    text-align: left;
+   width: 100%;
+   min-width: unset;
+   padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .filter-button {
+    font-size: 13px;
+    padding: 7px 15px;
+    min-width: 120px;
+  }
+
+  .geners {
+    position: absolute;
+    left: 0;
+    width: max-content;
+    min-width: 100%;
+    background: #292929;
+    color: white;
+    padding: 8px 12px; /* Balanced padding */
+    border-radius: 8px;
+    font-size: 13px;
+    z-index: 1;
+  }
+
+  .dropdown.open .geners {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr)); /* Fixed responsiveness */
+    gap: 8px; /* Better spacing */
+    padding: 10px;
+  }
+  .filter-bar {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .filter-bar :nth-child(5){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 195%;
+  }
+}
+
+@media (max-width: 768px) {
+  .anime-grid {
+    grid-template-columns: repeat(3, minmax(100px, 1fr)); /* More balanced grid */
+    gap: 15px; /* Improved spacing */
+  }
+
+  .anime-card {
+    max-width: 195px; /* Optimized for better alignment */
+    width: 100%;
+  }
+
+  .anime-card:hover {
+    transform: none;
+  }
+
+  .dropdown-btn {
+    text-align: left;
+   width: 100%;
+   min-width: unset;
+   padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .filter-button {
+    font-size: 13px;
+    padding: 7px 15px;
+    min-width: 120px;
+  }
+
+  .geners {
+    position: absolute;
+    left: 0;
+    width: max-content;
+    min-width: 100%;
+    background: #292929;
+    color: white;
+    padding: 8px 12px; /* Balanced padding */
+    border-radius: 8px;
+    font-size: 13px;
+    z-index: 1;
+  }
+
+  .dropdown.open .geners {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr)); /* Fixed responsiveness */
+    gap: 8px; /* Better spacing */
+    padding: 10px;
+  }
+  .filter-bar {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .filter-bar :nth-child(5){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 195%;
+  }
+}
+
+@media (max-width: 480px) {
+  .anime-grid {
+    grid-template-columns: repeat(2, minmax(100px, 1fr)); /* More balanced grid */
+    gap: 15px; /* Improved spacing */
+  }
+
+  .anime-card {
+    max-width: 195px; /* Optimized for better alignment */
+    width: 100%;
+  }
+
+  .anime-card:hover {
+    transform: none;
+  }
+
+  .dropdown-btn {
+    text-align: left;
+   width: 100%;
+   min-width: unset;
+   padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  .filter-button {
+    font-size: 13px;
+    padding: 7px 15px;
+    min-width: 120px;
+  }
+
+  .geners {
+    position: absolute;
+    left: 0;
+    width: max-content;
+    min-width: 100%;
+    background: #292929;
+    color: white;
+    padding: 8px 12px; /* Balanced padding */
+    border-radius: 8px;
+    font-size: 13px;
+    z-index: 1;
+  }
+
+  .dropdown.open .geners {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr)); /* Fixed responsiveness */
+    gap: 8px; /* Better spacing */
+    padding: 10px;
+  }
+  .filter-bar {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    
+  }
+
+  .filter-bar :nth-child(5){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 195%;
+  }
+
+ 
+}

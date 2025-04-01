@@ -1,0 +1,99 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: white;
+}
+
+.home-container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #1b1b1b;
+    overflow: hidden;
+}
+
+
+/* Main Layout */
+.content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar */
+app-sidebar {
+    width: 400px;
+    flex-shrink: 0;
+    background-color: #1e1e1e;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    transition: width 0.3s ease-in-out;
+}
+
+/* Anime List Wrapper */
+.anime-list-wrapper {
+    flex-grow: 1;
+    padding: 0;
+    overflow: hidden;
+    width: 100%;
+    max-width: calc(100% - 400px); /* Sidebar is 400px, AnimeList takes the rest */
+}
+
+@media (max-width: 1199px) {
+    .content-wrapper {
+        flex-direction: column; /* Stack Sidebar below AnimeList */
+    }
+
+    app-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .anime-list-wrapper {
+        max-width: 100%; /* Full width for AnimeList */
+    }
+}
+
+
+/* 🔹 Medium Screens (Tablets) */
+@media (max-width: 1024px) {
+    .content-wrapper {
+        flex-direction: column; /* Stack Sidebar below AnimeList */
+    }
+
+    app-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .anime-list-wrapper {
+        max-width: 100%; /* Full width for AnimeList */
+    }
+}
+
+/* 🔹 Small Screens (Mobile) */
+@media (max-width: 768px) {
+    .content-wrapper {
+        flex-direction: column; /* Stack Sidebar below AnimeList */
+    }
+
+    app-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .anime-list-wrapper {
+        max-width: 100%; /* Full width for AnimeList */
+    }
+}

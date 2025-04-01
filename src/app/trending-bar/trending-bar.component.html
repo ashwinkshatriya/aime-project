@@ -1,0 +1,27 @@
+<div class="trending-section">
+  <h2 class="section-title">Trending</h2>
+  <div class="trending-container">
+    <!-- Left Blur Effect -->
+    <div class="blur-left"></div>
+
+    <button class="nav-arrow left-arrow" (click)="scrollLeft()" [class.hidden]="isAtStart">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <div class="trending-list" #trendingList>
+      <div *ngFor="let anime of trendingAnime" class="anime-card-wrapper">
+        <div class="anime-card" (click)="goToDetail(anime._id)">
+          <img [src]="anime.image" [alt]="anime.title" class="anime-image">
+        </div>
+        <h3 class="anime-title">{{ anime.title }}</h3> <!-- Title below card -->
+      </div>
+    </div>
+
+    <button class="nav-arrow right-arrow" (click)="scrollRight()" [class.hidden]="isAtEnd">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+    <!-- Right Blur Effect -->
+    <div class="blur-right"></div>
+  </div>
+</div>

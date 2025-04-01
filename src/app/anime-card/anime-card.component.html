@@ -1,0 +1,37 @@
+<div class="anime-list-container">
+  <div class="section-header">
+    <h2 class="section-title">Latest Episode</h2>
+
+    <div class="pagination-container">
+      <div class="page-indicator">Page {{ currentPage + 1 }}</div>
+
+      <div class="pagination-controls">
+        <button (click)="prevPage()" [disabled]="currentPage === 0" class="nav-arrow left-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+        <button (click)="nextPage()" [disabled]="(currentPage + 1) * pageSize >= animeList.length" class="nav-arrow right-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="pagedAnimeList.length > 0; else noData" class="anime-grid">
+    <div *ngFor="let anime of pagedAnimeList" class="anime-card">
+      <a [routerLink]="['/anime-detail', anime._id]" (click)="openInSameTab($event, anime._id)" target="_blank" rel="noopener noreferrer">
+        <div class="anime-thumbnail">
+          <img [src]="anime.image" alt="{{ anime.title }}">
+          <!-- 18+ label when isAdult is true -->
+          <span *ngIf="anime.isAdult === true" class="age-restriction">18+</span>
+          <div class="tags">
+            <span class="cc"><i class="fa-solid fa-closed-captioning"></i> {{ getSubbedEpisodesCount(anime) }}</span>
+            <span class="mic"><i class="fa-solid fa-microphone"></i> {{ getDubbedEpisodesCount(anime) }}</span>
+          </div>
+        </div>
+        <div class="anime-info">
+          <h3 class="anime-title">{{ anime.title }}</h3>
+          <p class="anime-meta">TV • {{ anime.duration || '24m' }}</p>
+        </div>
+      </a>
+    </div>
+  </div>
+  
+
+  <ng-template #noData><p class="no-data-message">No anime found.</p></ng-template>
+</div>

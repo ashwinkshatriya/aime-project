@@ -1,0 +1,220 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.trending-section {
+    padding: 20px;
+    background-color: #1b1b1b;
+    color: white;
+    width: 100%;
+}
+
+/* Trending Title */
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    padding-left: 20px;
+}
+
+/* Container for the Trending Bar */
+.trending-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Arrows for Scrolling */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    border: none;
+    color: white;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease-in;
+}
+
+.nav-arrow:hover {
+    color: gray;
+}
+
+.left-arrow {
+    left: 5px;
+}
+
+.right-arrow {
+    right: 5px;
+}
+
+/* Hide arrows when necessary */
+.nav-arrow.hidden {
+    display: none;
+}
+
+/* Trending List (Scroll Container) */
+.trending-list {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px;
+    gap: 15px;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    width: 100%;
+}
+
+.trending-list::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
+}
+
+/* Wrapper for Anime Card & Title */
+.anime-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px; /* Responsive width */
+}
+
+/* Anime Card */
+.anime-card {
+    position: relative;
+    width: 180px;
+    height: 270px;
+    cursor: pointer;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.anime-card:hover {
+    transform: scale(1.05);
+}
+
+/* Anime Image */
+.anime-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Anime Title (Now Outside the Card) */
+.anime-title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8px; /* Space between card & title */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+/* Blur Effects on Left & Right */
+.blur-left, .blur-right {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Left Blur */
+.blur-left {
+    left: 0;
+    background: linear-gradient(to right, rgba(27, 27, 27, 1), rgba(27, 27, 27, 0));
+}
+
+/* Right Blur */
+.blur-right {
+    right: 0;
+    background: linear-gradient(to left, rgba(27, 27, 27, 1), rgba(27, 27, 27, 0));
+}
+
+/* ========== RESPONSIVE STYLES ========== */
+
+/* Tablet (768px and below) */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 20px;
+        padding-left: 10px;
+    }
+
+    .trending-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .anime-card-wrapper {
+        width: 150px;
+    }
+
+    .anime-card {
+        width: 150px;
+        height: 225px;
+    }
+
+    .anime-title {
+        font-size: 12px;
+    }
+
+    .nav-arrow {
+        font-size: 1.2rem;
+        width: 35px;
+        height: 35px;
+    }
+
+    .blur-left, .blur-right {
+        width: 30px;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 18px;
+        text-align: center;
+        padding-left: 0;
+    }
+
+    .trending-list {
+        padding: 5px;
+        gap: 10px;
+    }
+
+    .anime-card-wrapper {
+        width: 120px;
+    }
+
+    .anime-card {
+        width: 120px;
+        height: 180px;
+    }
+
+    .anime-title {
+        font-size: 10px;
+        margin-top: 5px;
+    }
+
+    .nav-arrow {
+        font-size: 1rem;
+        width: 30px;
+        height: 30px;
+    }
+
+    .blur-left, .blur-right {
+        width: 20px;
+    }
+}
